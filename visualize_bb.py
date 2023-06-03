@@ -5,7 +5,7 @@ video_path = "[LAB-AI] Matteo Cutroni/Video/20220822_093927.mp4"
 cap = cv.VideoCapture(video_path)
 
 #Apertura file txt con tracks
-file = open("[LAB-AI] Matteo Cutroni/Tracks/20220822_093927.txt")
+file = open("new_tracks.txt")
 Lines = file.readlines()
 
 while cap.isOpened():
@@ -26,12 +26,18 @@ while cap.isOpened():
         if (cap_frame_idx == frame_idx):
             
             frame = cv.rectangle(frame, (left, top), (left+w, top+h), (0, 255, 0), 2)
-            frame = cv.putText(frame, f"ID: {id}", (left, top-10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            frame = cv.putText(frame, f"ID: {id}", (left, top+30), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
     # Mostra il frame con le bounding box
     cv.imshow('Video con bounding box', frame)
-    if cv.waitKey(1) == ord('q'):
+
+    #chiudi con q, pausa con p
+    key = cv.waitKey(1)
+    if key == ord('q'):
         break
+    if key == ord('p'):
+        print(cap_frame_idx)
+        cv.waitKey(-1) 
 
 cap.release()
 cv.destroyAllWindows()
