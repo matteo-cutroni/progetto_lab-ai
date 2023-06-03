@@ -8,6 +8,12 @@ cap = cv.VideoCapture(video_path)
 file = open("new_tracks.txt")
 Lines = file.readlines()
 
+#VideoWriter per salvare video
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+fourcc = cv.VideoWriter_fourcc(*'mp4v')
+out = cv.VideoWriter('video_con_bb.mp4', fourcc, 25.0, (frame_width, frame_height))
+
 while cap.isOpened():
     #Capture frame per frame
     ret, frame = cap.read()
@@ -30,6 +36,9 @@ while cap.isOpened():
 
     # Mostra il frame con le bounding box
     cv.imshow('Video con bounding box', frame)
+    
+    #scrive frame nel video di output
+    out.write(frame)
 
     #chiudi con q, pausa con p
     key = cv.waitKey(1)
@@ -40,4 +49,5 @@ while cap.isOpened():
         cv.waitKey(-1) 
 
 cap.release()
+out.release()
 cv.destroyAllWindows()
