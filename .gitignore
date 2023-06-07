@@ -3,3 +3,5 @@
 data/
 *.txt
 *.mp4
+runs/
+*.zip
