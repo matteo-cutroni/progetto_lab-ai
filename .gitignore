@@ -1,7 +1,7 @@
-*.png
 \[LAB-AI\] Matteo Cutroni/
 data/
 *.txt
 *.mp4
 runs/
 *.zip
+__pycache__/
