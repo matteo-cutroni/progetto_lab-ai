@@ -40,11 +40,12 @@ def create_data(tracks, frames_folder):
     with tqdm(total=len(lines), desc='Progresso', unit='righe') as progress_bar:
         #ciclo su righe del file
         for box_info in lines:
-            frame_idx, id, left, top, w, h, conf, x,y,z = box_info.split(', ')
+            #per training e val split(', ') e varibile z, per test split(',') senza z
+            frame_idx, id, left, top, w, h, conf, x,y = box_info.split(',')
             frame_idx, id, left, top, w, h = int(float(frame_idx)), int(float(id)), int(float(left)), int(float(top)), int(float(w)), int(float(h))
 
             #crea directory se non esiste già
-            dir_path = os.path.join('data', f'{id:04d}')
+            dir_path = os.path.join('test_set', f'{id:04d}')
             if not os.path.isdir(dir_path):
                 os.mkdir(dir_path)
 
@@ -62,10 +63,10 @@ def create_data(tracks, frames_folder):
 
 
 old_tracks = "[LAB-AI] Matteo Cutroni/Tracks/20220822_093927.txt"
-new_tracks = "new_tracks.txt"
-frames_folder = "[LAB-AI] Matteo Cutroni/Video/20220822_093927"
+new_tracks = "Test_set/gt.txt"
+frames_folder = "Test_set/Grapes_001"
 min_tracks = 50
 
 
-skim_tracks(old_tracks, new_tracks, min_tracks)
+#skim_tracks(old_tracks, new_tracks, min_tracks)
 create_data(new_tracks, frames_folder)

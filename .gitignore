@@ -5,3 +5,5 @@ data/
 runs/
 *.zip
 __pycache__/
+test_set/
+Test_set/
